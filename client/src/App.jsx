@@ -7,6 +7,7 @@ import RecipeResults from './pages/RecipeResults'
 import Login from './components/Login'
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import SearchBar from './components/SearchBar'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/generate" element={<SearchBar/>}/>
         <Route path="/recipes" element={<RecipeResults />} />
         <Route path="/recipes/:id" element={<RecipeDetail />} />
         <Route path="/login" element={<Login />} />

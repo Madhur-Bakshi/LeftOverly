@@ -8,7 +8,7 @@ const Header = () => {
         <span className='text-yellow-600'>Meals!</span>
       </h1>
       <div className="mt-6">
-        <Link to="/recipes">
+        <Link to="/generate">
         <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 text-lg rounded-full shadow-md transition duration-300">Get Started</button>
         </Link>
       </div>
