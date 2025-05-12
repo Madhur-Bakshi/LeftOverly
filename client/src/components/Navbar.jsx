@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { assets } from "../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
-
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setUser(null);
+    logout();
     navigate("/login");
   };
 
@@ -25,7 +17,7 @@ const Navbar = () => {
       <Link to="/" className="flex items-center font-myFont text-3xl">
         <img
           src={assets.logo}
-          alt=""
+          alt="Logo"
           className="h-12 w-16 rounded-lg border-2"
         />
         <span className="font-myFont text-4xl ml-2">LeftOverly</span>

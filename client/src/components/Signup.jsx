@@ -2,21 +2,22 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export default function Login() {
+export default function Signup() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const { login } = useAuth();
+  const { signup } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
+      await signup(username, email, password);
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.message || "Invalid credentials");
+      setError(err.response?.data?.message || "Signup failed");
     }
   };
 
@@ -25,9 +26,18 @@ export default function Login() {
       onSubmit={handleSubmit}
       className="max-w-md mx-auto p-4 border rounded shadow"
     >
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
 
       {error && <p className="text-red-500 mb-2">{error}</p>}
+
+      <input
+        className="w-full p-2 border rounded mb-2"
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
+      />
 
       <input
         className="w-full p-2 border rounded mb-2"
@@ -49,14 +59,14 @@ export default function Login() {
 
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+        className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700"
       >
-        Login
+        Sign Up
       </button>
       <p className="mt-2 text-sm text-center">
-        Don't have an account?{" "}
-        <a href="/signup" className="text-blue-500 hover:underline">
-          Sign Up
+        Already have an account?{" "}
+        <a href="/login" className="text-blue-500 hover:underline">
+          Login
         </a>
       </p>
     </form>
