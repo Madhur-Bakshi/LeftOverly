@@ -1,12 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useSearchContext } from "../context/SearchContext";
 
 const GenerateBtn = () => {
   const { user } = useAuth();
+  const { clearSearchData } = useSearchContext();
   const navigate = useNavigate();
 
   const handleClick = () => {
+    clearSearchData(); // clear input and results
     if (user) {
       navigate("/generate");
     } else {

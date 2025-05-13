@@ -1,25 +1,44 @@
-import {createContext, useState} from 'react';
+import { createContext, useState, useContext } from "react";
 
 export const SearchContext = createContext();
 
-const SearchProvider = ({children}) => {
-    const [ingredients,setIngredients]=useState([]);
+export const useSearchContext = () => useContext(SearchContext); // helpful shortcut
 
-    const addIngredient = (ingredient)=>{
-        if(!ingredient.trim()) return;
-        setIngredients((prev)=>[...new Set([...prev,ingredient.trim().toLowerCase()])]);
+const SearchProvider = ({ children }) => {
+  const [ingredients, setIngredients] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
-    };
-     const removeIngredient = (ingredient) => {
-       setIngredients((prev) => prev.filter((i) => i !== ingredient));
-     };
-    return (
-        <SearchContext.Provider 
-        value={{
-            ingredients,setIngredients,addIngredient
-            ,removeIngredient}}>
-                {children}
-        </SearchContext.Provider>
-    )
+  const addIngredient = (ingredient) => {
+    if (!ingredient.trim()) return;
+    setIngredients((prev) => [
+      ...new Set([...prev, ingredient.trim().toLowerCase()]),
+    ]);
+  };
+
+  const removeIngredient = (ingredient) => {
+    setIngredients((prev) => prev.filter((i) => i !== ingredient));
+  };
+
+  const clearSearchData = () => {
+    setIngredients([]); // ✅ reset ingredients to empty array
+    setRecipes([]); // ✅ reset recipes to empty array
+  };
+
+  return (
+    <SearchContext.Provider
+      value={{
+        ingredients,
+        setIngredients,
+        addIngredient,
+        removeIngredient,
+        recipes,
+        setRecipes,
+        clearSearchData,
+      }}
+    >
+      {children}
+    </SearchContext.Provider>
+  );
 };
-export default SearchProvider
+
+export default SearchProvider;
