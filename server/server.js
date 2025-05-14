@@ -1,9 +1,10 @@
-import mongoose from "mongoose";
 import express from "express";
+import mongoose from "mongoose";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import "dotenv/config";
+
 import connectDB from "./mongodb.js";
 import authRoutes from "./routes/authRoutes.js";
 import recipeRoutes from "./routes/recipes.js";
@@ -23,22 +24,25 @@ app.use("/api/auth", authRoutes);
 app.use("/api/recipes", recipeRoutes);
 
 // ----------------------
-// Static files setup
+// Static Files Setup
 // ----------------------
 
 // Get __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve frontend
-app.use(express.static(path.join(__dirname, "client", "build"))); // Adjust if your frontend is elsewhere
+// Serve static files from React frontend
+app.use(express.static(path.join(__dirname, "client", "build")));
 
-// Fallback for React Router
+// Fallback for SPA (React Router)
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
-// Start server
+// Start the server
 app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+  console.log(`✅ Server listening on http://localhost:${PORT}`);
 });
+
+
+
