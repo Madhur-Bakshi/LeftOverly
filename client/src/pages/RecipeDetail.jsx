@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import YouTubeVideo from "../components/YouTubeVideo";
 import { SearchContext } from "../context/SearchContext";
+import { motion } from "framer-motion";
 
 export default function RecipeDetail() {
   const { id } = useParams();
@@ -28,10 +29,14 @@ export default function RecipeDetail() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 text-gray-800 space-y-10">
       <h1 className="text-4xl font-bold text-center mb-8">{info.title}</h1>
-      <img
+      <motion.img
         src={info.image}
         alt={info.title}
         className="flex h-auto rounded-xl shadow-md mb-8 mx-auto block"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        whileHover={{ scale: 1.05 }}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -89,7 +94,7 @@ export default function RecipeDetail() {
 
       <button
         onClick={() => navigate("/generate")} // ✅ always go to list
-        className="mt-6 mx-auto block bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-full transition"
+        className="mt-6 mx-auto block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full transition"
       >
         Back to Recipes
       </button>

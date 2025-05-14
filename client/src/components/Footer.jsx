@@ -1,12 +1,10 @@
-// src/components/Footer.jsx
 import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 text-center text-gray-600 py-6 mt-12">
+    <footer className="bg-green-50 text-center text-green-800 py-6 mt-12 border-t">
       © {new Date().getFullYear()}{" "}
-      <span className="font-semibold text-green-600">LeftOverly</span>. Made
-      with 💚
+      <span className="font-semibold">LeftOverly</span>. Made with 💚
     </footer>
   );
 }

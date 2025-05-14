@@ -12,7 +12,7 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-yellow-50 via-green-50 to-white">
       <Navbar />
       <main className="flex-grow">
         <Routes>
