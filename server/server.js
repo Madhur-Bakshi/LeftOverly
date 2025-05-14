@@ -1,44 +1,24 @@
 import mongoose from "mongoose";
 import express from "express";
 import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
 import "dotenv/config";
 import connectDB from "./mongodb.js";
 import authRoutes from "./routes/authRoutes.js";
-import recipeRoutes from "./routes/recipes.js";
+import recipeRoutes from "./routes/recipes.js"; // ✅ ADD THIS
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// Middleware
 app.use(express.json());
 app.use(cors());
 
-// Connect to DB
 await connectDB();
 
-// API Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/recipes", recipeRoutes);
+app.use("/api/recipes", recipeRoutes); 
 
-// ----------------------
-// Static files setup
-// ----------------------
+app.get("/", (req, res) => res.send("API Working"));
 
-// Get __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Serve frontend
-app.use(express.static(path.join(__dirname, "client", "build"))); // Adjust if your frontend is elsewhere
-
-// Fallback for React Router
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
-
-// Start server
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 });
