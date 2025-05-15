@@ -26,7 +26,7 @@ export default function Signup() {
       onSubmit={handleSubmit}
       className="max-w-md mx-auto p-4 border rounded shadow"
     >
-      <h2 className="text-2xl font-bold mb-4 flex items-center">Sign Up</h2>
+      <h2 className="text-2xl font-bold mb-4 flex justify-center">Sign Up</h2>
 
       {error && <p className="text-red-500 mb-2">{error}</p>}
 
