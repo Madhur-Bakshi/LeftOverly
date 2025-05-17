@@ -93,7 +93,7 @@ export default function RecipeDetail() {
       </div>
 
       <button
-        onClick={() => navigate("/generate")} // ✅ always go to list
+        onClick={() => navigate("/generate")} 
         className="mt-6 mx-auto block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full transition"
       >
         Back to Recipes

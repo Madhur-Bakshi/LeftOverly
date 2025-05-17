@@ -36,7 +36,7 @@ export default function Generate() {
       if (!res.ok) throw new Error(`Status ${res.status}`);
       const data = await res.json();
       const withImages = data.filter((r) => r.image?.trim() !== "");
-      setRecipes(withImages); // ✅ Store in context
+      setRecipes(withImages); // Store in context
     } catch (err) {
       console.error("Error fetching recipes:", err);
       alert("Something went wrong. Please try again.");

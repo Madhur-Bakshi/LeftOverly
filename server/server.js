@@ -23,7 +23,7 @@ app.get("/", (req, res) => res.send("API Working"));
 // Start the server
 
 app.listen(PORT, () => {
-  console.log(`✅ Server listening on http://localhost:${PORT}`);
+  console.log(`Server listening on http://localhost:${PORT}`);
 });
 
 

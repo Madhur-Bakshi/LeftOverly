@@ -1,8 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
-const AuthContext = createContext();
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+export const AuthContext = createContext();
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -43,12 +45,18 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const value = {
+    user,
+    login,
+    signup,
+    logout,
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
-export default AuthContext;
+export default AuthProvider;

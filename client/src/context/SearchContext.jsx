@@ -2,9 +2,9 @@ import { createContext, useState, useContext } from "react";
 
 export const SearchContext = createContext();
 
-export const useSearchContext = () => useContext(SearchContext); // helpful shortcut
+export const useSearchContext = () => useContext(SearchContext);
 
-const SearchProvider = ({ children }) => {
+export const SearchProvider = ({ children }) => {
   const [ingredients, setIngredients] = useState([]);
   const [recipes, setRecipes] = useState([]);
 
@@ -20,21 +20,22 @@ const SearchProvider = ({ children }) => {
   };
 
   const clearSearchData = () => {
-    setIngredients([]); // ✅ reset ingredients to empty array
-    setRecipes([]); // ✅ reset recipes to empty array
+    setIngredients([]);
+    setRecipes([]);
   };
 
+  const value = {
+    ingredients,
+    setIngredients,
+    addIngredient,
+    removeIngredient,
+    recipes,
+    setRecipes,
+    clearSearchData,
+  };
   return (
     <SearchContext.Provider
-      value={{
-        ingredients,
-        setIngredients,
-        addIngredient,
-        removeIngredient,
-        recipes,
-        setRecipes,
-        clearSearchData,
-      }}
+      value={value}
     >
       {children}
     </SearchContext.Provider>

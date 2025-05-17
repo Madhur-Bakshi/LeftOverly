@@ -16,7 +16,7 @@ export const findByIngredients = async (req, res) => {
         },
       }
     );
-    res.json(resp.data); // ✅ sends data back
+    res.json(resp.data); // sends data back
   } catch (err) {
     console.error("Spoonacular error:", err.response?.data || err.message);
     res
