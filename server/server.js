@@ -25,6 +25,3 @@ app.get("/", (req, res) => res.send("API Working"));
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 });
-
-
-

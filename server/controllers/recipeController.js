@@ -10,7 +10,7 @@ export const findByIngredients = async (req, res) => {
       {
         params: {
           ingredients: ingredients.join(","),
-          number: 10,
+          number: 12,
           ranking: 1,
           apiKey: SPOON_KEY,
         },
