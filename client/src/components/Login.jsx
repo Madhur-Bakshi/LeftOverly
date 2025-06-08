@@ -14,7 +14,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate("/");
+      navigate("/generate");
     } catch (err) {
       setError(err.response?.data?.message || "Invalid credentials");
     }

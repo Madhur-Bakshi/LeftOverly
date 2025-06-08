@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-
+import { useSearchContext } from "./SearchContext";
 export const AuthContext = createContext();
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -8,6 +8,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const {clearSearchData} = useSearchContext();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -43,6 +44,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     setUser(null);
+    clearSearchData();
   };
 
   const value = {

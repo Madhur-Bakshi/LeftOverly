@@ -7,10 +7,10 @@ import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <AuthProvider>
       <SearchProvider>
+    <AuthProvider>
         <App />
-      </SearchProvider>
     </AuthProvider>
+      </SearchProvider>
   </BrowserRouter>
 );
