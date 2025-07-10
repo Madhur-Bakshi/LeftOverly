@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { motion } from "framer-motion";
+import { assets } from "../assets/assets";
 
 export default function Signup() {
   const [username, setUsername] = useState("");
@@ -15,60 +17,92 @@ export default function Signup() {
     e.preventDefault();
     try {
       await signup(username, email, password);
-      navigate("/");
+      navigate("/generate");
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-md mx-auto p-4 border rounded shadow"
-    >
-      <h2 className="text-2xl font-bold mb-4 flex justify-center">Sign Up</h2>
-
-      {error && <p className="text-red-500 mb-2">{error}</p>}
-
-      <input
-        className="w-full p-2 border rounded mb-2"
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-
-      <input
-        className="w-full p-2 border rounded mb-2"
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-
-      <input
-        className="w-full p-2 border rounded mb-4"
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-
-      <button
-        type="submit"
-        className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700"
+    <div className="fixed top-0 left-0 right-0 bottom-0 z-10 backdrop-blur-sm bg-black/30 flex justify-center items-center">
+      <motion.form
+        onSubmit={handleSubmit}
+        initial={{ opacity: 0.2, y: 50 }}
+        transition={{ duration: 0.3 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="relative bg-white p-10 rounded-xl text-slate-500 w-full max-w-md"
       >
-        Sign Up
-      </button>
-      <p className="mt-2 text-sm text-center">
-        Already have an account?{" "}
-        <Link to="/login" className="text-blue-500 hover:underline">
-          Login
-        </Link>
-      </p>
-    </form>
+        <h2 className="text-center text-2xl text-neutral-700 font-medium mb-2">
+          Sign Up
+        </h2>
+
+        <p className="text-sm mb-4 text-center">
+          Join us today! Create your account
+        </p>
+
+        {error && (
+          <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+        )}
+
+        <div className="border px-5 py-2 flex items-center gap-2 rounded-full mb-3">
+          <img
+            src={assets.profile_icon}
+            alt="profile"
+            width={21}
+            style={{ opacity: 0.6 }}
+          />
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="outline-none text-sm w-full"
+            required
+          />
+        </div>
+
+        <div className="border px-6 py-2 flex items-center gap-2 rounded-full mb-3">
+          <img src={assets.email_icon} alt="email" width={16} />
+          <input
+            type="email"
+            placeholder="Email id"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="outline-none text-sm w-full"
+            required
+          />
+        </div>
+
+        <div className="border px-6 py-2 flex items-center gap-2 rounded-full mb-4">
+          <img src={assets.lock_icon} alt="lock" width={14} />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="outline-none text-sm w-full"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="bg-green-600 w-full text-white py-2 rounded-full hover:bg-green-700 transition"
+        >
+          Create Account
+        </button>
+
+        <p className="mt-5 text-center text-sm">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="text-blue-600 cursor-pointer hover:underline"
+          >
+            Login
+          </Link>
+        </p>
+      </motion.form>
+    </div>
   );
 }
