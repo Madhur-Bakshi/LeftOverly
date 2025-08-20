@@ -7,6 +7,7 @@ const YouTubeVideo = ({ recipeName }) => {
   useEffect(() => {
     const getVideo = async () => {
       const url = await fetchYouTubeVideo(recipeName);
+      if(!url) return setVideoUrl(null);
       setVideoUrl(url);
     };
 
