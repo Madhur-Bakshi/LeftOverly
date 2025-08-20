@@ -23,6 +23,7 @@ const YouTubeVideo = ({ recipeName }) => {
           title={`YouTube video for ${recipeName}`}
           frameBorder="0"
           allowFullScreen
+          className="rounded-lg shadow-md"
         ></iframe>
       ) : (
         <p>No video found for this recipe.</p>
