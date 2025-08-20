@@ -45,6 +45,19 @@ export default function Generate() {
     }
   };
 
+/*
+  
+  {
+    ingredients:["rice","tomato","cheese"]
+  }
+
+  output
+  [
+    {
+      "id":715538, "title":"Pasta with cheese","image":"..."},
+    } 
+  ]
+*/  
   return (
     <div className="px-4 py-6">
       <SearchBar />

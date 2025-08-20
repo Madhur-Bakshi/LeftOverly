@@ -11,7 +11,7 @@ export default function MealCard({ recipe }) {
       whileTap={{ scale: 0.97 }}
       className="bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden transition-all duration-300 flex flex-col"
     >
-      <button onClick={() => navigate(`/recipes/${recipe.id}`)}>
+      <div onClick={() => navigate(`/recipes/${recipe.id}`)}>
         <img
           src={recipe.image}
           alt={recipe.title}
@@ -34,7 +34,7 @@ export default function MealCard({ recipe }) {
             </button>
           </div>
         </div>
-      </button>
+      </div>
     </motion.div>
   );
 }
